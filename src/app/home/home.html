@@ -1,0 +1,57 @@
+<h1>პროგრამირების სერვისები</h1>
+
+<ul>
+  <li (click)="openPopup('Lite')">
+    <h2>Lite</h2>
+    <p>მარტივი ვებგვერდი, Landing page</p>
+    <p>ფასი: $100</p>
+  </li>
+
+  <li (click)="openPopup('Normal')">
+    <h2>Normal</h2>
+    <p>ინტერმედიული ვებ-აპლიკაცია, CMS, ბლოგი</p>
+    <p>ფასი: $500</p>
+  </li>
+
+  <li (click)="openPopup('Hard')">
+    <h2>Hard</h2>
+    <p>კომპლექსური სისტემა, e-commerce, შიდა პორტალები</p>
+    <p>ფასი: $1000+</p>
+  </li>
+</ul>
+
+<div class="modal" [class.active]="isPopupOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closePopup()">×</span>
+
+    <h2>{{selectedPackage}} პაკეტის შეკვეთა</h2>
+
+    <form (ngSubmit)="submitForm()" #myForm="ngForm">
+  <input [(ngModel)]="formData.name" name="name" placeholder="სახელი" required #name="ngModel">
+  <div *ngIf="name.invalid && name.touched" style="color:red">
+    გთხოვთ შეიყვანეთ სახელი.
+  </div>
+
+  <input [(ngModel)]="formData.surname" name="surname" placeholder="გვარი" required #surname="ngModel">
+  <div *ngIf="surname.invalid && surname.touched" style="color:red">
+    გთხოვთ შეიყვანეთ გვარი.
+  </div>
+
+  <input [(ngModel)]="formData.email" name="email" placeholder="ელ-ფოსტა" required email #email="ngModel">
+  <div *ngIf="email.invalid && email.touched" style="color:red">
+    გთხოვთ შეიყვანეთ მოქმედი ელ-ფოსტა.
+  </div>
+
+  <input [(ngModel)]="formData.phone" name="phone" placeholder="ტელეფონი" required pattern="[0-9]+" #phone="ngModel">
+  <div *ngIf="phone.invalid && phone.touched" style="color:red">
+    გთხოვთ შეიყვანეთ მოქმედი ტელეფონის ნომერი (მხოლოდ რიცხვები).
+  </div>
+
+  <br>
+  <button type="submit" [disabled]="myForm.invalid">
+    გაგზავნა
+  </button>
+</form>
+
+  </div>
+</div>
